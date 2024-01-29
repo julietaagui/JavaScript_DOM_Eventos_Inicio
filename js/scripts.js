@@ -12,12 +12,11 @@ console.log(heading);
 // querySelectorAll(llama a toodos los que correspondan)
 
 const enlaces = document.querySelectorAll('.navegacion a');
-console.log(enlaces[0]);
-
+// console.log(enlaces[0]);
 enlaces[0].textContent = 'Nuevo Texto para Enlace';
-console.log(enlaces)
-
-
-
+// enlaces[0].href = 'http://google.com';
 
 // getElementById
+const heading2 = document.getElementById('heading');
+console.log(heading);
+
