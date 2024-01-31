@@ -66,11 +66,15 @@ console.log(nuevoEnlace);
 // }
 
 // Seleccionar elemnetos y sasociales un evento
-const btnEnviar = document.querySelector('.boton.boton--primario');
-btnEnviar.addEventListener('click', function(evento) {
-    evento.preventDefault();
-    console.log('enviando formulario');
-})
+// const btnEnviar = document.querySelector('.boton.boton--primario');
+// btnEnviar.addEventListener('click', function(evento) {
+//     console.log(evento);
+//     evento.preventDefault();
+// })
+
+// validar formulario
+
+// console.log('Enviando formulario')
 
 
 // Eventos de los imput y los text area
@@ -84,15 +88,66 @@ const datos = {
 const nombre = document.querySelector('#nombre');
 const email = document.querySelector('#email');
 const mensaje = document.querySelector('#mensaje');
+const formulario = document.querySelector('.formulario');
 
 nombre.addEventListener('input', leerTexto );
 email.addEventListener('input', leerTexto);
 mensaje.addEventListener('input', leerTexto);
 
+// Evento de Submit
+formulario.addEventListener('submit', function(evento){
+    evento.preventDefault();
+
+    // validar formulario
+    const { nombre, email, mensaje } = datos;
+
+    if(nombre === ''|| email === '' || mensaje === ''){
+        mostrarError('Todos los campos son obligatorios')
+       
+        return ; //Corta la ejecucion del codigo
+    }
+
+    // Crrear la alerta de Enviar Correctamene
+    mostrarAlerta('Mensaje enviado corrrectamente');
+    limpiar();
+});
+
 function leerTexto(e){
     // console.log(e.target.value);
-
     datos[e.target.id] = e.target.value;
 
-    console.log(datos);
+    // console.log(datos);
+}
+
+function mostrarAlerta(mensaje, error = null){
+    const alerta = document.createElement('P');
+    alerta.textContent = mensaje;
+
+    if(error){
+        alerta.classList.add('error');
+    }else{
+        alerta.classList.add('correcto')
+    }
+
+    formulario.appendChild(alerta)
+
+}
+
+function mostrarError(mensaje) {
+    const alerta = document.createElement('p');
+    alerta.textContent = mensaje;
+    alerta.classList.add('error');
+
+    formulario.appendChild(alerta);
+
+    setTimeout(() => {
+        alerta.remove();
+    }, 3000);
+}
+
+//lipiar imput
+function limpiar() {
+    nombre.value = "";
+    email.value = "";
+    mensaje.value = "";
 }
